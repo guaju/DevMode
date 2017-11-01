@@ -29,4 +29,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     //2、json数据解析的工具
     implementation 'com.google.code.gson:gson:2.2.4'
+    //3、打印log的框架
+    compile 'com.orhanobut:logger:2.1.1'
+
 }

@@ -1,9 +1,8 @@
 package com.guaju.devmode.httputil;
 
 
-import android.util.Log;
-
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 import java.util.Map;
@@ -66,10 +65,10 @@ public class OkHttpUtils {
         String path = "";
         String newPath = "";
         //concat 往后边追加
-        path.concat(url + "?");
+
         //当用户传入null或者传了一个空的map
         if (params != null && !params.isEmpty()) {
-
+            path.concat(url + "?");
             Set<Map.Entry<String, String>> entries = params.entrySet();
             for (Map.Entry<String, String> map : entries) {
                 path.concat(map.getKey() + "=" + map.getValue()).concat("&");
@@ -79,7 +78,7 @@ public class OkHttpUtils {
         }
         //调用ok的get请求
         Request request = new Request.Builder()
-                .url(newPath)//声明网访问的网址
+                .url(newPath==""?url:newPath)//声明网访问的网址
                 .get() //声明我是get请求，如果不写默认就是get
                 .build();  //创建request
 
@@ -119,9 +118,11 @@ public class OkHttpUtils {
                         //调用者只需要实现provide方法就能拿到这个String了
                         callBack.provideData(string);
 
+                    }else{
+                        callBack.provideData(response.body().string());
                     }
                 }catch (IOException e){
-                    Log.e(TAG, e.getMessage() );
+                    Logger.e( e.getMessage() );
                 }
 
 
