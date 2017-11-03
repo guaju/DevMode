@@ -2,6 +2,7 @@ package com.guaju.devmode.app;
 
 import android.app.Application;
 
+import com.guaju.devmode.qiniu.QiniuUtils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -24,5 +25,7 @@ public class MyApp extends Application {
                 .build();
 
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+        //初始化7牛
+        QiniuUtils.init();
     }
 }

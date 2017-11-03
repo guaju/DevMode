@@ -12,15 +12,24 @@ public class User {
      * data : {"username":"xiaoming","password":"123456"}
      */
 
-    private int code;
+    private String code;
+    private String msg;
     private DataBean data;
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public DataBean getData() {
@@ -50,6 +59,10 @@ public class User {
 
         public String getPassword() {
             return password;
+        }
+
+        public DataBean(String username) {
+            this.username = username;
         }
 
         public void setPassword(String password) {

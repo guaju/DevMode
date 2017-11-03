@@ -31,5 +31,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.2.4'
     //3、打印log的框架
     compile 'com.orhanobut:logger:2.1.1'
+    //4、7牛图片存储框架 （7牛需要添加okhttp辅助）
+    compile 'com.qiniu:qiniu-android-sdk:7.3.10'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+
 
 }

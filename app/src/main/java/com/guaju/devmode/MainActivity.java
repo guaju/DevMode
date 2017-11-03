@@ -3,14 +3,10 @@ package com.guaju.devmode;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.guaju.devmode.bean.User;
-import com.guaju.devmode.httputil.CustomCallBack;
-import com.guaju.devmode.httputil.OkHttpUtils;
+import com.guaju.devmode.qiniu.QiniuUtils;
 import com.orhanobut.logger.Logger;
 
-import java.io.IOException;
-
-import okhttp3.Response;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -19,26 +15,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String path="http://127.0.0.1:8080/hello.html";
-        String path2="http://localhost:8080/hello.html";
-        String path3="http://192.168.38.226/hello.html";
-        String path4="https://www.baidu.com";
+        String path="http://guaju.butterfly.mopaasapp.com/MyServlet";
+        HashMap<String, String> map = new HashMap<>();
+        map.put("user_name","laowang2");
+        map.put("password","12345");
+        //上传一个图片到7牛云
+        try {
+            String token = QiniuUtils.calcToken("heihei.png");
+            Logger.e(token);
+
+            QiniuUtils.uploadPicWithProgress("/sdcard/Download/heihei.png","heihei.png",token);
 
 
-        OkHttpUtils.getInstance().getBean(path3, null, new CustomCallBack(User.class) {
-            @Override
-            public void onMyResponse(Response response, Class clazz) {
-                try {
-                    String json = response.body().string();
-                   User user= (User) OkHttpUtils.gson.fromJson(json,clazz);
+        } catch (Exception e) {
+            Logger.e(e.getMessage());
+            e.printStackTrace();
+        }
 
-                    String username = user.getData().getUsername();
-                    Logger.e("onMyResponse: "+username );
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
 
 
     }

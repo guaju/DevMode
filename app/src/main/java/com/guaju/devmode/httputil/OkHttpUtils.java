@@ -62,16 +62,16 @@ public class OkHttpUtils {
      */
 
     public void getString(String url, Map<String, String> params, Callback mCallBack) {
-        String path = "";
+        String path = url;
         String newPath = "";
         //concat 往后边追加
 
         //当用户传入null或者传了一个空的map
         if (params != null && !params.isEmpty()) {
-            path.concat(url + "?");
+            path+=("?");
             Set<Map.Entry<String, String>> entries = params.entrySet();
             for (Map.Entry<String, String> map : entries) {
-                path.concat(map.getKey() + "=" + map.getValue()).concat("&");
+                path+=(map.getKey() + "=" + map.getValue()).concat("&");
             }
             //把拼接好的网站去掉最后一个"&"符号
             newPath = path.substring(0, path.length() - 1);
